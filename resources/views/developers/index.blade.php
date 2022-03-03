@@ -69,6 +69,7 @@
                                             @can('user_access')
                                             <a href="{{ route('developers.show', $item->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
                                             <a href="{{ route('developers.edit', $item->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
+                                            <a href="{{ route('developers/add-skills', $item->id) }}" class="text-yellow-600 hover:text-yellow-900 mb-2 mr-2">Add Skills</a>
                                             <form class="inline-block" action="{{ route('developers.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">

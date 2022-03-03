@@ -56,7 +56,26 @@
                             @enderror
                         </div>
 
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Location</label>
+                            <input type="text" name="location" id="location" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('location', '') }}" />
 
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Price</label>
+                            <input step=".01" type="number" name="price" id="price" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('price', '') }}" />
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Working Type</label>
+                            Full-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block"
+                                   value="1" />
+                            Part-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block "
+                                             value="2" />
+                        </div>
 
                         <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">

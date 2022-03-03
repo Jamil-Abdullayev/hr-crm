@@ -21,6 +21,9 @@ return new class extends Migration
             $table->text('messenger');
             $table->string('email');
             $table->text('social_media');
+            $table->text('location');
+            $table->decimal('price');
+            $table->smallInteger('working_type');//full time 1, part-time 2
             $table->softDeletes();
             $table->timestamps();
         });

@@ -28,8 +28,15 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::resource('skills',\App\Http\Controllers\SkillController::class);
+
 Route::resource('developers',\App\Http\Controllers\DeveloperController::class);
+Route::get('developers/add-skills/{id}',[\App\Http\Controllers\DeveloperController::class,'add_skills'])->name('developers/add-skills');
+Route::post('developers/add-skills',[\App\Http\Controllers\DeveloperController::class,'store_skills'])->name('developers/store-skills');
+
 Route::resource('companies',\App\Http\Controllers\CompanyController::class);
+
 Route::resource('contacts',\App\Http\Controllers\ContactController::class);
+
 Route::resource('requests',\App\Http\Controllers\RequestController::class);
+
 
