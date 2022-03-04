@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Select2AutoSearch;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,16 +28,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', \App\Http\Controllers\UsersController::class);
 });
 
-Route::resource('skills',\App\Http\Controllers\SkillController::class);
+Route::resource('skills', \App\Http\Controllers\SkillController::class);
 
-Route::resource('developers',\App\Http\Controllers\DeveloperController::class);
-Route::get('developers/add-skills/{id}',[\App\Http\Controllers\DeveloperController::class,'add_skills'])->name('developers/add-skills');
-Route::post('developers/add-skills',[\App\Http\Controllers\DeveloperController::class,'store_skills'])->name('developers/store-skills');
+Route::resource('developers', \App\Http\Controllers\DeveloperController::class);
+Route::get('developers/add-skills/{id}', [\App\Http\Controllers\DeveloperController::class, 'add_skills'])->name('developers/add-skills');
+Route::post('developers/add-skills', [\App\Http\Controllers\DeveloperController::class, 'store_skills'])->name('developers/store-skills');
 
-Route::resource('companies',\App\Http\Controllers\CompanyController::class);
+Route::resource('companies', \App\Http\Controllers\CompanyController::class);
 
-Route::resource('contacts',\App\Http\Controllers\ContactController::class);
+Route::resource('contacts', \App\Http\Controllers\ContactController::class);
 
-Route::resource('requests',\App\Http\Controllers\RequestController::class);
+Route::resource('requests', \App\Http\Controllers\RequestController::class);
 
-
+Route::get('filter',[\App\Http\Controllers\FilterController::class,'index'])->name('filter');
+Route::post('filter',[\App\Http\Controllers\FilterController::class,'search'])->name('search');
