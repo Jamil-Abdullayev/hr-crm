@@ -9,7 +9,7 @@
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             @can('user_access')
             <div class="block mb-8">
-                <a href="{{ route('skills.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Request</a>
+                <a href="{{ route('requests.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Request</a>
             </div>
             @endcan
             <div class="flex flex-col">
@@ -23,10 +23,17 @@
                                         ID
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Developer
+                                        Company
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Company
+                                        Skills
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Price
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Working Type
                                     </th>
                                     <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
 
@@ -41,16 +48,39 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $developers[$item->developer_id] }}
+                                            {{ $companies[$item->company_id] }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $companies[$item->company_id] }}
+                                        <td>
+                                            @php
+                                                $skill_string='';
+                                                foreach($item->skills as $skill)
+                                                {
+                                                   $skill_string.=$skill->name.',';
+                                                }
+                                               echo substr($skill_string,0,-1);
+                                            @endphp
+                                        </td>
+
+                                        <td>
+                                            {{$item->price}} USD
+                                        </td>
+
+                                        <td>
+                                            @php
+                                            if($item->working_type==1)
+                                                {
+                                                    echo 'Full Time';
+                                                }
+                                            elseif($item->working_type==2)
+                                                {
+                                                    echo 'Part Time';
+                                                }
+                                            @endphp
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             @can('user_access')
-                                            <a href="{{ route('requests.show', $item->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
                                             <a href="{{ route('requests.edit', $item->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                                             <form class="inline-block" action="{{ route('requests.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="_method" value="DELETE">
@@ -58,6 +88,15 @@
                                                 <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Delete">
                                             </form>
                                             @endcan
+                                                <form method="post" action="{{route('search')}}">
+                                                    @csrf
+                                                    @foreach($item->skills as $skill)
+                                                        <input type="hidden" name="skills[]" value="{{$skill->id}}">
+                                                    @endforeach
+                                                        <input type="hidden" name="price" value="{{$item->price}}">
+                                                        <input type="hidden" name="working_type" value="{{$item->working_type}}">
+                                                        <input type="submit" class="text-blue-600 hover:text-blue-900 mb-2 mr-2" value="Search">
+                                                </form>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -108,6 +108,9 @@ class DeveloperController extends Controller
     public function destroy($id)
     {
         $data=Developer::find($id);
+        $selected_skills=$data->skills;
+        $data->skills()->detach($selected_skills);//delete old skills
+
         $data->delete();
         return redirect()->route('developers.index');
     }

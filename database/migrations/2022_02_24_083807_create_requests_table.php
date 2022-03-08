@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('developer_id');
+           // $table->bigInteger('developer_id');
             $table->bigInteger('company_id');
+            $table->decimal('price');
+            $table->smallInteger('working_type');
             $table->softDeletes();
             $table->timestamps();
         });

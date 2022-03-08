@@ -58,7 +58,8 @@ class RequestController extends Controller
     {
         $request_table=new \App\Models\Request();
         $request_table->company_id=$request->input('company');
-        $request_table->developer_id=$request->input('developer');
+        $request_table->working_type=$request->input('working_type');
+        $request_table->price=$request->input('price');
         $request_table->save();
         //in top insert process to request table
 
@@ -97,7 +98,16 @@ class RequestController extends Controller
      */
     public function edit($id)
     {
-        //
+        $request_data=\App\Models\Request::find($id);
+        $skills=Skill::all();//all skills
+        $companies=Company::all();
+        $selected_skills=$request_data->skills;
+        $selected_skills_ids=array();
+        foreach ($selected_skills as $item)
+        {
+            $selected_skills_ids[$item->id]=$item->id;
+        }
+        return view('requests.edit',['request_data'=>$request_data,'companies'=>$companies,'skills'=>$skills,'selected_skills_ids'=>$selected_skills_ids]);
     }
 
     /**
@@ -109,7 +119,28 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request_table=\App\Models\Request::find($id);
+        $request_table->company_id=$request->input('company');
+        $request_table->working_type=$request->input('working_type');
+        $request_table->price=$request->input('price');
+        $request_table->save();
+        //in top insert process to request table
+
+        //deleting skills
+        $selected_skills=$request_table->skills;
+        $request_table->skills()->detach($selected_skills);//delete old skills
+
+        //insert to request_skill start
+        $req_arr=$request->all();
+        foreach ($req_arr['skills'] as $item)
+        {
+            //inserting
+            $skill=Skill::find($item);
+            $request_table->skills()->attach($skill);
+        }
+        //insert to request_skill end
+
+        return redirect()->route('requests.index');
     }
 
     /**
@@ -120,6 +151,11 @@ class RequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data=\App\Models\Request::find($id);
+        $selected_skills=$data->skills;
+        $data->skills()->detach($selected_skills);//delete old skills
+
+        $data->delete();
+        return redirect()->route('requests.index');
     }
 }

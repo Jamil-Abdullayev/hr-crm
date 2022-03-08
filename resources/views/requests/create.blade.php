@@ -28,21 +28,16 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
 
-                            <label for="name" class="block font-medium text-sm text-gray-700">Developer</label>
+                            <label for="name" class="block font-medium text-sm text-gray-700">Price</label>
                             <div wire:ignore>
-                                <select name="developer" class="form-control select2" id="">
-                                    @foreach($developers as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
-                                </select>
-
+                                <input type="number" class="form-control" name="price">
                             </div>
 
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
 
-                            <label for="name" class="block font-medium text-sm text-gray-700">Skill</label>
+                            <label for="name" class="block font-medium text-sm text-gray-700">Skills</label>
                             <div wire:ignore>
                                 <select name="skill[]" class="form-control select2" id="" multiple>
                                     @foreach($skills as $item)
@@ -52,6 +47,15 @@
 
                             </div>
 
+                        </div>
+
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Working Type</label>
+                            Full-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block"
+                                             value="1" />
+                            Part-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block "
+                                             value="2" />
                         </div>
 
                         @push('scripts')

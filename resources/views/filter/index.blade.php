@@ -92,6 +92,10 @@
                                     <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
                                         Skills
                                     </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -126,6 +130,9 @@
                                                 }
                                                echo substr($skill_string,0,-1);
                                             @endphp
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('developers.show', $item->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">Show Developer</a>
                                         </td>
                                     </tr>
                                 @endforeach
