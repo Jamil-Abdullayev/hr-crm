@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Developer;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class DeveloperController extends Controller
 {
@@ -46,6 +48,23 @@ class DeveloperController extends Controller
         $developer->location=$request->input('location');
         $developer->price=$request->input('price');
         $developer->working_type=$request->input('working_type');
+        $developer->price_per_hour=$request->input('price_per_hour');
+        $developer->english_level=$request->input('english_level');
+        $developer->age=$request->input('age');
+        $developer->experience=$request->input('experience');
+
+        if($request->hasFile('developer_image'))
+        {
+            $file=$request->file('developer_image');
+            $extension=$file->getClientOriginalExtension();
+            $file_name=time().'-'.rand(31,999).'.'.$extension;
+            $file->move('images/',$file_name);
+            $developer->developer_image=$file_name;
+        }else
+        {
+            $developer->developer_image="";
+        }
+
         $developer->save();
         return redirect()->route('developers.index');
     }
@@ -95,6 +114,25 @@ class DeveloperController extends Controller
         $developer->location=$request->input('location');
         $developer->price=$request->input('price');
         $developer->working_type=$request->input('working_type');
+        $developer->price_per_hour=$request->input('price_per_hour');
+        $developer->english_level=$request->input('english_level');
+        $developer->age=$request->input('age');
+        $developer->experience=$request->input('experience');
+
+        if($request->hasFile('developer_image'))
+        {
+            $destination='images/'.$developer->developer_image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+
+            $file=$request->file('developer_image');
+            $extension=$file->getClientOriginalExtension();
+            $file_name=time().'-'.rand(31,999).'.'.$extension;
+            $file->move('images/',$file_name);
+            $developer->developer_image=$file_name;
+        }
         $developer->save();
         return redirect()->route('developers.index');
     }
@@ -107,11 +145,17 @@ class DeveloperController extends Controller
      */
     public function destroy($id)
     {
-        $data=Developer::find($id);
-        $selected_skills=$data->skills;
-        $data->skills()->detach($selected_skills);//delete old skills
+        $developer=Developer::find($id);
+        $destination='images/'.$developer->developer_image;
+        if(File::exists($destination))
+        {
+            File::delete($destination);
+        }
 
-        $data->delete();
+        $selected_skills=$developer->skills;
+        $developer->skills()->detach($selected_skills);//delete old skills
+
+        $developer->delete();
         return redirect()->route('developers.index');
     }
 

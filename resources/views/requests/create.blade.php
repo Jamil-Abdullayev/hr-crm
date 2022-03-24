@@ -27,13 +27,62 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-
-                            <label for="name" class="block font-medium text-sm text-gray-700">Price</label>
-                            <div wire:ignore>
-                                <input type="number" class="form-control" name="price">
-                            </div>
-
+                            <label for=""  class="block font-medium text-sm text-gray-700">Price Type:</label>
+                            <br>
+                            <label for="wt1">Monthly&nbsp;</label><input name="pr_type" onchange="checkRadioButton()" id="pt1" type="radio"
+                                                                         value="1">
+                            <br>
+                            <label for="wt2">Per/Hour&nbsp;</label><input name="pr_type" onchange="checkRadioButton()" id="pt2" type="radio"
+                                                                          value="2">
                         </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+
+                            <label class="block font-medium text-sm text-gray-700" for="">Price Monthly</label>
+                            <div class="flex">
+                                <input id="pm1" step=".01" type="number" class="form-control" name="price_min" value="">
+                                -
+                                <input id="pm2" step=".01" type="number" class="form-control" name="price_max" value="">
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for=""  class="block font-medium text-sm text-gray-700">Price Per/Hour</label>
+                            <div class="flex">
+                                <input id="ph1" step=".01" type="number" class="form-control" name="price_per_hour_min" value="">
+                                -
+                                <input id="ph2" step=".01" type="number" class="form-control" name="price_per_hour_max" value="">
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for=""  class="block font-medium text-sm text-gray-700">Language(English):</label>
+                            <select class="form-control select" name="english_level" id="">
+                                <option selected value="">-</option>
+                                <option value="1">Low</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Expert</option>
+                            </select>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label  class="block font-medium text-sm text-gray-700" for="">Experience:</label>
+                            <div class="flex">
+                                <input class="form-control" type="number" name="exp_min" value="">
+                                -
+                                <input class="form-control" type="number" name="exp_max" value="">
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label  class="block font-medium text-sm text-gray-700" for="">Age Range:</label>
+                            <div class="flex">
+                                <input class="form-control" type="number" name="age_min" value="">
+                                -
+                                <input class="form-control" type="number" name="age_max" value="">
+                            </div>
+                        </div>
+
 
                         <div class="px-4 py-5 bg-white sm:p-6">
 
@@ -50,12 +99,16 @@
                         </div>
 
 
+
+
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="name" class="block font-medium text-sm text-gray-700">Working Type</label>
-                            Full-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block"
-                                             value="1" />
-                            Part-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block "
-                                             value="2" />
+                            <label for=""  class="block font-medium text-sm text-gray-700">Working Type:</label>
+                            <br>
+                            <label for="wt1">Full-Time&nbsp;</label><input   type="radio" name="working_type"
+                                                                         value="1">
+                            <br>
+                            <label for="wt2">Part-Time&nbsp;</label><input  type="radio" name="working_type"
+                                                                          value="2">
                         </div>
 
                         @push('scripts')
@@ -82,3 +135,25 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function checkRadioButton()
+    {
+        if(document.getElementById('pt1').checked) {
+            document.getElementById('ph1').disabled=true;
+            document.getElementById('ph2').disabled=true;
+        }
+        else{
+            document.getElementById('ph1').disabled=false;
+            document.getElementById('ph2').disabled=false;
+        }
+        if(document.getElementById('pt2').checked) {
+            document.getElementById('pm1').disabled=true;
+            document.getElementById('pm2').disabled=true;
+        }
+        else{
+            document.getElementById('pm1').disabled=false;
+            document.getElementById('pm2').disabled=false;
+        }
+    }
+</script>

@@ -21,7 +21,7 @@
                                     @foreach($companies as $item)
                                         @if($item->id==$request_data->company_id)
                                             {
-                                                <option selected value="{{$item->id}}">{{$item->name}}</option>
+                                            <option selected value="{{$item->id}}">{{$item->name}}</option>
                                             }
                                         @else
 
@@ -35,18 +35,67 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
-
-                            <label for="name" class="block font-medium text-sm text-gray-700">Price</label>
-                            <div wire:ignore>
-                                <input type="number" class="form-control" name="price" value="{{$request_data->price}}">
-                            </div>
-
+                            <label for=""  class="block font-medium text-sm text-gray-700">Price Type:</label>
+                            <br>
+                            <label for="wt1">Monthly&nbsp;</label><input onchange="checkRadioButton()" id="pt1" name="pr_type" type="radio"
+                                                                         value="1">
+                            <br>
+                            <label for="wt2">Per/Hour&nbsp;</label><input onchange="checkRadioButton()" id="pt2" name="pr_type" type="radio"
+                                                                          value="2">
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
 
-                            <label for="name" class="block font-medium text-sm text-gray-700">Skill</label>
-                            <div>
+                            <label class="block font-medium text-sm text-gray-700" for="">Price Monthly</label>
+                            <div class="flex">
+                                <input id="pm1" step=".01" type="number" class="form-control" name="price_min" value="{{$request_data->price_min}}">
+                                -
+                                <input id="pm2" step=".01" type="number" class="form-control" name="price_max" value="{{$request_data->price_max}}">
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for=""  class="block font-medium text-sm text-gray-700">Price Per/Hour</label>
+                            <div class="flex">
+                                <input id="ph1" step=".01" type="number" class="form-control" name="price_per_hour_min" value="{{$request_data->price_per_hour_min}}">
+                                -
+                                <input id="ph2" step=".01" type="number" class="form-control" name="price_per_hour_max" value="{{$request_data->price_per_hour_max}}">
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for=""  class="block font-medium text-sm text-gray-700">Language(English):</label>
+                            <select class="form-control select" name="english_level" id="">
+                                <option value="">-</option>
+                                <option @if($request_data->english_level==1) selected @endif value="1">Low</option>
+                                <option @if($request_data->english_level==2) selected @endif value="2">Medium</option>
+                                <option @if($request_data->english_level==3) selected @endif value="3">Expert</option>
+                            </select>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label  class="block font-medium text-sm text-gray-700" for="">Experience:</label>
+                            <div class="flex">
+                                <input class="form-control" type="number" name="exp_min" value="">
+                                -
+                                <input class="form-control" type="number" name="exp_max" value="">
+                            </div>
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label  class="block font-medium text-sm text-gray-700" for="">Age Range:</label>
+                            <div class="flex">
+                                <input class="form-control" type="number" name="age_min" value="">
+                                -
+                                <input class="form-control" type="number" name="age_max" value="">
+                            </div>
+                        </div>
+
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+
+                            <label for="name" class="block font-medium text-sm text-gray-700">Skills</label>
+                            <div wire:ignore>
                                 <select name="skills[]" class="form-control select2" id="" multiple>
                                     @foreach($skills as $item)
                                         @php
@@ -66,12 +115,16 @@
                         </div>
 
 
+
+
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            <label for="name" class="block font-medium text-sm text-gray-700">Working Type</label>
-                            Full-Time <input @if($request_data->working_type==1) checked @endif type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block"
-                                             value="1" />
-                            Part-Time <input @if($request_data->working_type==2) checked @endif type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block "
-                                             value="2" />
+                            <label for=""  class="block font-medium text-sm text-gray-700">Working Type:</label>
+                            <br>
+                            <label for="wt1">Full-Time&nbsp;</label><input   @if($request_data->working_type==1) checked @endif  type="radio" name="working_type"
+                                                                             value="1">
+                            <br>
+                            <label for="wt2">Part-Time&nbsp;</label><input  @if($request_data->working_type==2) checked @endif  type="radio" name="working_type"
+                                                                            value="2">
                         </div>
 
                         @push('scripts')
@@ -89,7 +142,7 @@
                         @endpush
                         <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                Submit
+                                Edit
                             </button>
                         </div>
                     </div>
@@ -98,3 +151,25 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function checkRadioButton()
+    {
+        if(document.getElementById('pt1').checked) {
+            document.getElementById('ph1').disabled=true;
+            document.getElementById('ph2').disabled=true;
+        }
+        else{
+            document.getElementById('ph1').disabled=false;
+            document.getElementById('ph2').disabled=false;
+        }
+        if(document.getElementById('pt2').checked) {
+            document.getElementById('pm1').disabled=true;
+            document.getElementById('pm2').disabled=true;
+        }
+        else{
+            document.getElementById('pm1').disabled=false;
+            document.getElementById('pm2').disabled=false;
+        }
+    }
+</script>

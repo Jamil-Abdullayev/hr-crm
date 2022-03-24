@@ -59,7 +59,21 @@ class RequestController extends Controller
         $request_table=new \App\Models\Request();
         $request_table->company_id=$request->input('company');
         $request_table->working_type=$request->input('working_type');
-        $request_table->price=$request->input('price');
+
+        if($request->input('price_min')&&$request->input('price_max')) {
+            $request_table->price_min = $request->input('price_min');
+            $request_table->price_max = $request->input('price_max');
+        }
+        if($request->input('price_per_hour_min')&&$request->input('price_per_hour_max')){
+            $request_table->price_per_hour_min = $request->input('price_per_hour_min');
+            $request_table->price_per_hour_max = $request->input('price_per_hour_max');
+        }
+
+        $request_table->age_max=$request->input('age_max');
+        $request_table->age_min=$request->input('age_min');
+        $request_table->exp_min=$request->input('exp_min');
+        $request_table->exp_max=$request->input('exp_max');
+        $request_table->english_level=$request->input('english_level');
         $request_table->save();
         //in top insert process to request table
 
@@ -119,10 +133,23 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request_table=\App\Models\Request::find($id);
-        $request_table->company_id=$request->input('company');
+        $request_table=\App\Models\Request::find($id);$request_table->company_id=$request->input('company');
         $request_table->working_type=$request->input('working_type');
-        $request_table->price=$request->input('price');
+
+        if($request->input('price_min')&&$request->input('price_max')) {
+            $request_table->price_min = $request->input('price_min');
+            $request_table->price_max = $request->input('price_max');
+        }
+        if($request->input('price_per_hour_min')&&$request->input('price_per_hour_max')){
+            $request_table->price_per_hour_min = $request->input('price_per_hour_min');
+            $request_table->price_per_hour_max = $request->input('price_per_hour_max');
+        }
+
+        $request_table->age_max=$request->input('age_max');
+        $request_table->age_min=$request->input('age_min');
+        $request_table->exp_min=$request->input('exp_min');
+        $request_table->exp_max=$request->input('exp_max');
+        $request_table->english_level=$request->input('english_level');
         $request_table->save();
         //in top insert process to request table
 

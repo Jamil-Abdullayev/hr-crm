@@ -9,34 +9,231 @@
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <form action="{{route('search')}}" method="post">
                 @csrf
+                @if(!empty($selecedData))
                 <div class="row mb-3 p-2">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="">Skills</label>
-                        <select required class="form-control select2" name="skills[]" multiple>
+                        <select class="form-control select2" name="skills[]" multiple>
                             @foreach($skills as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                @php
+                                if(!empty($selectedData['skills'])){
+                                    if(in_array($item->id,$selectedData['skills'])) {
+                                        $selected='selected';
+                                    }
+                                    else {
+                                            $selected='';
+                                        }
+                                    }else
+                                        {
+                                            $selected='';
+                                        }
+                                @endphp
+                                <option {{$selected}} value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3">
-                        <label for="">Price</label>
-                        <input required step=".01" type="number" class="form-control" name="price" value="">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="">Working Type:</label>
+
+                    <div class="col-md-2">
+                        <label for="">Price Type:</label>
                         <br>
-                        <label for="wt1">Full-Time&nbsp;</label><input checked id="wt1" type="radio" name="working_type"
+                        <label for="wt1">Monthly&nbsp;</label><input onchange="checkRadioButton()" id="pt1" type="radio"
                                                                        value="1">
                         <br>
-                        <label for="wt2">Part-Time&nbsp;</label><input id="wt2" type="radio" name="working_type"
+                        <label for="wt2">Per/Hour&nbsp;</label><input onchange="checkRadioButton()" id="pt2" type="radio"
+                                                                       value="2">
+                    </div>
+
+                    <script>
+                        function checkRadioButton()
+                        {
+                            if(document.getElementById('pt1').checked) {
+                                document.getElementById('ph1').disabled=true;
+                                document.getElementById('ph2').disabled=true;
+                            }
+                            else{
+                                document.getElementById('ph1').disabled=false;
+                                document.getElementById('ph2').disabled=false;
+                            }
+                            if(document.getElementById('pt2').checked) {
+                                document.getElementById('pm1').disabled=true;
+                                document.getElementById('pm2').disabled=true;
+                            }
+                            else{
+                                document.getElementById('pm1').disabled=false;
+                                document.getElementById('pm2').disabled=false;
+                            }
+                        }
+                    </script>
+
+                    <div class="col-md-2">
+                        <label for="">Price Monthly</label>
+                        <div class="flex">
+                            <input id="pm1" step=".01" type="number" class="form-control" name="price_min" value="{{$selectedData->price_min}}">
+                            -
+                            <input id="pm2" step=".01" type="number" class="form-control" name="price_max" value="{{$selectedData->price_max}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="">Price Per/Hour</label>
+                        <div class="flex">
+                            <input id="ph1" step=".01" type="number" class="form-control" name="price_per_hour_min" value="{{$selectedData->price_per_hour_min}}">
+                            -
+                            <input id="ph2" step=".01" type="number" class="form-control" name="price_per_hour_max" value="{{$selectedData->price_per_hour_max}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="">Language(English):</label>
+                        <select class="form-control select" name="english_level" id="">
+                            <option  value="">-</option>
+                            <option @if($selectedData->english_level==1) selected @endif value="1">Low</option>
+                            <option @if($selectedData->english_level==2) selected @endif value="2">Medium</option>
+                            <option @if($selectedData->english_level==3) selected @endif value="3">Expert</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="">EXP:</label>
+                        <div class="flex">
+                            <input class="form-control" type="number" name="exp_min" value="{{$selectedData->exp_min}}">
+                            -
+                            <input class="form-control" type="number" name="exp_max" value="{{$selectedData->exp_max}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 ">
+                        <label for="">Age Range:</label>
+                        <div class="flex">
+                            <input class="form-control" type="number" name="age_min" value="{{$selectedData->age_min}}">
+                            -
+                            <input class="form-control" type="number" name="age_max" value="{{$selectedData->age_max}}">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <label for="">Working Type:</label>
+                        <br>
+                        <label for="wt1">Full-Time&nbsp;</label><input @if($selectedData->working_type==1) checked @endif  checked id="wt1" type="radio" name="working_type"
+                                                                       value="1">
+                        <br>
+                        <label for="wt2">Part-Time&nbsp;</label><input @if($selectedData->working_type==2) checked @endif  id="wt2" type="radio" name="working_type"
                                                                        value="2">
                     </div>
                     <div class="col-md-2">
-                        <button style="margin-top:10%;" class="btn btn-success form-control">
-                            Submit
+                        <button style="margin-top:10%;" class="btn btn-info form-control">
+                            <span style="color:white;">Submit</span>
                         </button>
                     </div>
                 </div>
+                @else
+                    <div class="row mb-3 p-2">
+                        <div class="col-md-2">
+                            <label for="">Skills</label>
+                            <select class="form-control select2" name="skills[]" multiple>
+                                @foreach($skills as $item)
+
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="">Price Type:</label>
+                            <br>
+                            <label for="wt1">Monthly&nbsp;</label><input onchange="checkRadioButton()" id="pt1" type="radio"
+                                                                         value="1">
+                            <br>
+                            <label for="wt2">Per/Hour&nbsp;</label><input onchange="checkRadioButton()" id="pt2" type="radio"
+                                                                          value="2">
+                        </div>
+
+                        <script>
+                            function checkRadioButton()
+                            {
+                                if(document.getElementById('pt1').checked) {
+                                    document.getElementById('ph1').disabled=true;
+                                    document.getElementById('ph2').disabled=true;
+                                }
+                                else{
+                                    document.getElementById('ph1').disabled=false;
+                                    document.getElementById('ph2').disabled=false;
+                                }
+                                if(document.getElementById('pt2').checked) {
+                                    document.getElementById('pm1').disabled=true;
+                                    document.getElementById('pm2').disabled=true;
+                                }
+                                else{
+                                    document.getElementById('pm1').disabled=false;
+                                    document.getElementById('pm2').disabled=false;
+                                }
+                            }
+                        </script>
+
+                        <div class="col-md-2">
+                            <label for="">Price Monthly</label>
+                            <div class="flex">
+                                <input id="pm1" step=".01" type="number" class="form-control" name="price_min" value="">
+                                -
+                                <input id="pm2" step=".01" type="number" class="form-control" name="price_max" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="">Price Per/Hour</label>
+                            <div class="flex">
+                                <input id="ph1" step=".01" type="number" class="form-control" name="price_per_hour_min" value="">
+                                -
+                                <input id="ph2" step=".01" type="number" class="form-control" name="price_per_hour_max" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="">Language(English):</label>
+                            <select class="form-control select" name="english_level" id="">
+                                <option selected value="">-</option>
+                                <option  value="1">Low</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Expert</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="">EXP:</label>
+                            <div class="flex">
+                                <input class="form-control" type="number" name="exp_min" value="">
+                                -
+                                <input class="form-control" type="number" name="exp_max" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 ">
+                            <label for="">Age Range:</label>
+                            <div class="flex">
+                                <input class="form-control" type="number" name="age_min" value="">
+                                -
+                                <input class="form-control" type="number" name="age_max" value="">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <label for="">Working Type:</label>
+                            <br>
+                            <label for="wt1">Full-Time&nbsp;</label><input checked id="wt1" type="radio" name="working_type"
+                                                                           value="1">
+                            <br>
+                            <label for="wt2">Part-Time&nbsp;</label><input  id="wt2" type="radio" name="working_type"
+                                                                           value="2">
+                        </div>
+                        <div class="col-md-2">
+                            <button style="margin-top:10%;" class="btn btn-info form-control">
+                                <span style="color:white;">Submit</span>
+                            </button>
+                        </div>
+                    </div>
+                @endif
                 @push('scripts')
 
                     <script>
@@ -71,6 +268,10 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Photo
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Name
                                     </th>
                                     <th scope="col"
@@ -89,13 +290,14 @@
                                         class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Social Media
                                     </th>
-                                    <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
-                                        Skills
-                                    </th>
                                     <th scope="col"
                                         class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Skills
+                                    </th>
+                                    <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
 
                                     </th>
+
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -104,6 +306,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $item->id }}
                                         </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <img src="images/{{$item->developer_image}}" alt="">
+                                        </td>
+
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $item->name }}
@@ -132,7 +339,7 @@
                                             @endphp
                                         </td>
                                         <td>
-                                            <a href="{{ route('developers.show', $item->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">Show Developer</a>
+                                            <a href="{{ route('developers.show', $item->id) }}" style="color:white;" class="btn btn-info">Show More</a>
                                         </td>
                                     </tr>
                                 @endforeach

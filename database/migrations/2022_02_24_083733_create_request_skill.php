@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('request_skill', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('skill_id');
-            $table->bigInteger('request_id');
+            $table->bigInteger('skill_id')->nullable();
+            $table->bigInteger('request_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

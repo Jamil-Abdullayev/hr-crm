@@ -8,7 +8,7 @@
     <div>
         <div class="max-w-4xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="post" action="{{ route('developers.update', $data->id) }}">
+                <form method="post" enctype="multipart/form-data" action="{{ route('developers.update', $data->id) }}">
                     @csrf
                     @method('put')
                     <div class="shadow overflow-hidden sm:rounded-md">
@@ -19,6 +19,26 @@
                             @error('name')
                             <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
+                        </div>
+
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Photo</label>
+                            <img  src="/images/{{$data->developer_image}}" alt="">
+                            <input type="file" name="developer_image" id="developer_image" class="form-input rounded-md shadow-sm mt-1 block w-full"/>
+
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Age</label>
+                            <input type="text" name="age" id="age" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('name', $data->age) }}" />
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Experience</label>
+                            <input type="text" name="experience" id="experience" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('name', $data->age) }}" />
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
@@ -68,6 +88,22 @@
                             <label for="name" class="block font-medium text-sm text-gray-700">Price</label>
                             <input step=".01" type="number" name="price" id="price" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('price', $data->price) }}" />
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="name" class="block font-medium text-sm text-gray-700">Price Per/Hour</label>
+                            <input step=".01" type="number" name="price_per_hour" id="price_per_hour" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('price', $data->price_per_hour) }}" />
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                             <label for="name" class="block font-medium text-sm text-gray-700">English Level</label>
+                                <select name="english_level" id="" class="form-control">
+                                    <option @if($data->english_level==1) selected @endif value="1">Low</option>
+                                    <option @if($data->english_level==2) selected @endif value="2">Medium</option>
+                                    <option @if($data->english_level==3) selected @endif value="3">Expert</option>
+                                </select>
+
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">

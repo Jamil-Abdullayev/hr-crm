@@ -19,9 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('landing');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\FilterController::class,'index'])->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -40,5 +38,5 @@ Route::resource('contacts', \App\Http\Controllers\ContactController::class);
 
 Route::resource('requests', \App\Http\Controllers\RequestController::class);
 
-Route::get('filter',[\App\Http\Controllers\FilterController::class,'index'])->name('filter');
+Route::middleware(['auth:sanctum', 'verified'])->get('filter',[\App\Http\Controllers\FilterController::class,'index'])->name('filter');
 Route::post('filter',[\App\Http\Controllers\FilterController::class,'search'])->name('search');
