@@ -50,7 +50,7 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="roles" class="block font-medium text-sm text-gray-700">Companies</label>
-                            <select name="company_id" id="roles" class="form-multiselect block rounded-md shadow-sm mt-1 block w-full" multiple="multiple">
+                            <select name="company_id" id="roles" class="form-control select2" >
                                 @foreach($companies as $key => $value)
                                     <option value="{{ $key}}"@php if($key==$data->company_id){echo 'selected';} @endphp>{{ $value }}</option>
                                 @endforeach

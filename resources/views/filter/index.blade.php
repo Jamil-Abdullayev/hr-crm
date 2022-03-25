@@ -109,6 +109,7 @@
                     <h4>
                         Search
                     </h4>
+
                     <form action="{{route('search')}}" method="post">
                         @csrf
                         @if(!empty($selecedData))
@@ -232,6 +233,7 @@
                         @else
                             <div class="form">
                                 <div class="form-group">
+
                                     <label for="">Skills</label>
                                     <select class="form-control select2" name="skills[]" multiple>
                                         @foreach($skills as $item)
@@ -257,37 +259,49 @@
                                         if(document.getElementById('pt1').checked) {
                                             document.getElementById('ph1').disabled=true;
                                             document.getElementById('ph2').disabled=true;
+                                            document.getElementById('range_ph').disabled=true;
                                         }
                                         else{
                                             document.getElementById('ph1').disabled=false;
                                             document.getElementById('ph2').disabled=false;
+                                            document.getElementById('range_ph').disabled=false;
                                         }
                                         if(document.getElementById('pt2').checked) {
                                             document.getElementById('pm1').disabled=true;
                                             document.getElementById('pm2').disabled=true;
+                                            document.getElementById('range_pm').disabled=true;
                                         }
                                         else{
                                             document.getElementById('pm1').disabled=false;
                                             document.getElementById('pm2').disabled=false;
+                                            document.getElementById('range_pm').disabled=false;
                                         }
                                     }
                                 </script>
 
                                 <div class="form-group">
                                     <label for="">Price Monthly</label>
-                                    <div class="flex">
-                                        <label for="pm1">max:</label> <input id="pm1" step=".01" type="number" class="form-control" name="price_min" value="">
 
-                                        <label for="pm2">min:</label> <input id="pm2" step=".01" type="number" class="form-control" name="price_max" value="">
+                                    <div class="sliderCont">
+                                        <div  id="range_pm"></div>
+                                    </div>
+
+                                    <div class="flex">
+                                        <input id="pm1" step=".01" type="hidden" class="form-control" name="price_min" value="">
+                                        <input id="pm2" step=".01" type="hidden" class="form-control" name="price_max" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Price Per/Hour</label>
-                                    <div class="flex">
-                                        <label for="ph1">max:</label>  <input id="ph1" step=".01" type="number" class="form-control" name="price_per_hour_min" value="">
+                                    <div class="sliderCont">
+                                        <div  id="range_ph"></div>
+                                    </div>
 
-                                        <label for="ph2">min:</label>  <input id="ph2" step=".01" type="number" class="form-control" name="price_per_hour_max" value="">
+                                    <div class="flex">
+                                         <input id="ph1" step=".01" type="hidden" class="form-control" name="price_per_hour_min" value="">
+
+                                         <input id="ph2" step=".01" type="hidden" class="form-control" name="price_per_hour_max" value="">
                                     </div>
                                 </div>
 
@@ -303,19 +317,25 @@
 
                                 <div class="form-group">
                                     <label for="">Experience:</label>
+                                    <div class="sliderCont">
+                                        <div  id="range_exp"></div>
+                                    </div>
                                     <div class="flex">
-                                        <label for="exp1">max:</label>  <input id="exp1" class="form-control" type="number" name="exp_min" value="">
+                                         <input id="exp1" class="form-control" type="hidden" name="exp_min" value="">
 
-                                        <label for="exp2">min:</label> <input id="exp2" class="form-control" type="number" name="exp_max" value="">
+                                        <input id="exp2" class="form-control" type="hidden" name="exp_max" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Age Range:</label>
+                                    <div class="sliderCont">
+                                        <div  id="range_age"></div>
+                                    </div>
                                     <div class="flex">
-                                        <label for="age1">max:</label> <input id="age1" class="form-control" type="number" name="age_min" value="">
+                                       <input id="age1" class="form-control" type="hidden" name="age_min" value="">
 
-                                        <label for="age2">min:</label>  <input id="age2" class="form-control" type="number" name="age_max" value="">
+                                        <input id="age2" class="form-control" type="hidden" name="age_max" value="">
                                     </div>
                                 </div>
 
@@ -371,3 +391,146 @@
     }
 
 </style>
+<script>
+    var slider = document.getElementById('range_pm');
+
+    noUiSlider.create(slider, {
+        start: [ 1000, 8000 ], // Handle start position
+        step: 1, // Slider moves in increments of '10'
+        margin: 10, // Handles must be more than '20' apart
+        connect: true, // Display a colored bar between the handles
+        behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+        range: { // Slider can select '0' to '100'
+            'min': 0,
+            'max': 10000
+        }
+    });
+
+    var minCostInput = document.getElementById('pm1'),
+        maxCostInput = document.getElementById('pm2');
+
+    // When the slider value changes, update the input and span
+    slider.noUiSlider.on('update', function( values, handle ) {
+        if ( handle ) {
+            maxCostInput.value = values[handle];
+        } else {
+            minCostInput.value = values[handle];
+        }
+    });
+
+    minCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+
+    maxCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+    ///////////////price per month////////////////
+
+
+    var slider = document.getElementById('range_ph');
+
+    noUiSlider.create(slider, {
+        start: [ 20, 80 ], // Handle start position
+        step: 1, // Slider moves in increments of '10'
+        margin: 10, // Handles must be more than '20' apart
+        connect: true, // Display a colored bar between the handles
+        behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+        range: { // Slider can select '0' to '100'
+            'min': 0,
+            'max': 100
+        }
+    });
+
+    var minCostInput = document.getElementById('ph1'),
+        maxCostInput = document.getElementById('ph2');
+
+    // When the slider value changes, update the input and span
+    slider.noUiSlider.on('update', function( values, handle ) {
+        if ( handle ) {
+            maxCostInput.value = values[handle];
+        } else {
+            minCostInput.value = values[handle];
+        }
+    });
+
+    minCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+
+    maxCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+    ///////////////price per hour////////////////
+
+    var slider = document.getElementById('range_exp');
+
+    noUiSlider.create(slider, {
+        start: [ 1, 10 ], // Handle start position
+        step: 1, // Slider moves in increments of '10'
+        margin: 10, // Handles must be more than '20' apart
+        connect: true, // Display a colored bar between the handles
+        behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+        range: { // Slider can select '0' to '100'
+            'min': 0,
+            'max': 50
+        }
+    });
+
+    var minCostInput = document.getElementById('exp1'),
+        maxCostInput = document.getElementById('exp2');
+
+    // When the slider value changes, update the input and span
+    slider.noUiSlider.on('update', function( values, handle ) {
+        if ( handle ) {
+            maxCostInput.value = values[handle];
+        } else {
+            minCostInput.value = values[handle];
+        }
+    });
+
+    minCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+
+    maxCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+    ///////////////exp////////////////
+
+
+    var slider = document.getElementById('range_age');
+
+    noUiSlider.create(slider, {
+        start: [ 20, 80 ], // Handle start position
+        step: 1, // Slider moves in increments of '10'
+        margin: 10, // Handles must be more than '20' apart
+        connect: true, // Display a colored bar between the handles
+        behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+        range: { // Slider can select '0' to '100'
+            'min': 0,
+            'max': 100
+        }
+    });
+
+    var minCostInput = document.getElementById('age1'),
+        maxCostInput = document.getElementById('age2');
+
+    // When the slider value changes, update the input and span
+    slider.noUiSlider.on('update', function( values, handle ) {
+        if ( handle ) {
+            maxCostInput.value = values[handle];
+        } else {
+            minCostInput.value = values[handle];
+        }
+    });
+
+    minCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+
+    maxCostInput.addEventListener('change', function(){
+        slider.noUiSlider.set([null, this.value]);
+    });
+    ///////////////age////////////////
+</script>

@@ -104,10 +104,10 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for=""  class="block font-medium text-sm text-gray-700">Working Type:</label>
                             <br>
-                            <label for="wt1">Full-Time&nbsp;</label><input   type="radio" name="working_type"
+                            <label for="wt1">Full-Time&nbsp;</label><input id="wt1"  type="radio" name="working_type"
                                                                          value="1">
                             <br>
-                            <label for="wt2">Part-Time&nbsp;</label><input  type="radio" name="working_type"
+                            <label for="wt2">Part-Time&nbsp;</label><input id="wt2" type="radio" name="working_type"
                                                                           value="2">
                         </div>
 

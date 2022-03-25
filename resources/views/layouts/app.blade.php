@@ -30,6 +30,12 @@
 
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://refreshless.com/nouislider/distribute/nouislider.min.js"></script>
+        <script src="https://materializecss.com/extras/noUiSlider/nouislider.js"></script>
+
+        <link href="https://refreshless.com/nouislider/distribute/nouislider.min.css" rel="stylesheet">
+        <link href="https://materializecss.com/extras/noUiSlider/nouislider.css" rel="stylesheet">
+
 
 
     </head>
