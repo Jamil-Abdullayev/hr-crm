@@ -29,10 +29,10 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for=""  class="block font-medium text-sm text-gray-700">Price Type:</label>
                             <br>
-                            <label for="wt1">Monthly&nbsp;</label><input name="pr_type" onchange="checkRadioButton()" id="pt1" type="radio"
+                            <label for="pt1">Monthly&nbsp;</label><input name="pr_type" onchange="checkRadioButton()" id="pt1" type="radio"
                                                                          value="1">
                             <br>
-                            <label for="wt2">Per/Hour&nbsp;</label><input name="pr_type" onchange="checkRadioButton()" id="pt2" type="radio"
+                            <label for="pt2">Per/Hour&nbsp;</label><input name="pr_type" onchange="checkRadioButton()" id="pt2" type="radio"
                                                                           value="2">
                         </div>
 
@@ -157,3 +157,10 @@
         }
     }
 </script>
+<style>
+    [type="radio"]:not(:checked), [type="radio"]:checked {
+        position: relative;
+        opacity: 1;
+    }
+
+</style>

@@ -81,11 +81,11 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             @can('user_access')
-                                            <a href="{{ route('requests.edit', $item->id) }}" style="color: white;" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
+                                            <a href="{{ route('requests.edit', $item->id) }}" style="color: white;" class="btn orange text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                                             <form class="inline-block" action="{{ route('requests.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="submit" class="btn btn-danger text-red-600 hover:text-red-900 mb-2 mr-2" value="Delete">
+                                                <input type="submit" class="btn red text-red-600 hover:text-red-900 mb-2 mr-2" value="Delete">
                                             </form>
                                             @endcan
                                                 <form method="post" action="{{route('search')}}">
@@ -103,7 +103,7 @@
                                                         <input type="hidden" name="price_per_hour_min" value="{{$item->price_per_hour_min}}">
                                                         <input type="hidden" name="price_per_hour_max" value="{{$item->priceper_hour_max}}">
                                                         <input type="hidden" name="working_type" value="{{$item->working_type}}">
-                                                        <input type="submit" style="color:white;" class=" btn btn-info text-blue-600 hover:text-blue-900 mb-2 mr-2" value="Search">
+                                                        <input type="submit" style="color:white;" class=" btn blue text-blue-600 hover:text-blue-900 mb-2 mr-2" value="Search">
                                                 </form>
                                         </td>
                                     </tr>

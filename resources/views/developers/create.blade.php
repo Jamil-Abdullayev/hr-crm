@@ -105,9 +105,9 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="name" class="block font-medium text-sm text-gray-700">Working Type</label>
-                            Full-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block"
+                            <label for="wt1">  Full-Time</label> <input type="radio" name="working_type" id="wt1" class="form-radio rounded-md shadow-sm mt-1 block"
                                    value="1" />
-                            Part-Time <input type="radio" name="working_type" id="price" class="form-radio rounded-md shadow-sm mt-1 block "
+                            <label for="wt2">  Part-Time</label> <input type="radio" name="working_type" id="wt2" class="form-radio rounded-md shadow-sm mt-1 block "
                                              value="2" />
                         </div>
 
@@ -122,3 +122,10 @@
         </div>
     </div>
 </x-app-layout>
+<style>
+    [type="radio"]:not(:checked), [type="radio"]:checked {
+        position: relative;
+        opacity: 1;
+    }
+
+</style>

@@ -50,12 +50,12 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             @can('user_access')
-                                            <a href="{{ route('skills.show', $item->id) }}" style="color:white;" class="btn btn-info text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
-                                            <a href="{{ route('skills.edit', $item->id) }}" style="color:white;" class="btn btn-warning text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
+                                            <a href="{{ route('skills.show', $item->id) }}" style="color:white;" class="btn blue text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
+                                            <a href="{{ route('skills.edit', $item->id) }}" style="color:white;" class="btn orange text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
                                             <form class="inline-block" action="{{ route('skills.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="submit" class="btn btn-danger text-red-600 hover:text-red-900 mb-2 mr-2" value="Delete">
+                                                <input type="submit" class="btn red text-red-600 hover:text-red-900 mb-2 mr-2" value="Delete">
                                             </form>
                                             @endcan
                                         </td>
