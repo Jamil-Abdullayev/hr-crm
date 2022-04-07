@@ -76,7 +76,7 @@
                                         Messenger
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $data->messenger }}
+                                        <a href="{{ $data->messenger }}">{{ $data->messenger }}</a>
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -85,7 +85,7 @@
                                         Email
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $data->email }}
+                                        <a href="mailto:{{ $data->email }}">{{ $data->email }}</a>
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -94,7 +94,7 @@
                                         Social Media
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $data->social_media }}
+                                        <a href="{{ $data->social_media }}">{{ $data->social_media }}</a>
                                     </td>
                                 </tr>
                                 <tr class="border-b">

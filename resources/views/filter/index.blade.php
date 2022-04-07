@@ -28,10 +28,7 @@
                                                 class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Name
                                             </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Phone
-                                            </th>
+
                                             <th scope="col"
                                                 class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Messenger
@@ -70,17 +67,15 @@
                                                     {{ $item->name }}
                                                 </td>
 
+
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ $item->phone }}
+                                                    <a href="{{ $item->messenger }}">{{ $item->messenger }}</a>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ $item->messenger }}
+                                                    <a href="mailto:{{ $item->email }}">{{ $item->email }}</a>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ $item->email }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ $item->social_media }}
+                                                    <a href="{{ $item->social_media }}">{{ $item->social_media }}</a>
                                                 </td>
                                                 <td>
                                                     @php
@@ -119,6 +114,7 @@
                                     <select class="form-control select2" name="skills[]" multiple>
                                         @foreach($skills as $item)
                                             @php
+
                                                 if(!empty($selectedData['skills'])){
                                                     if(in_array($item->id,$selectedData['skills'])) {
                                                         $selected='selected';
@@ -139,10 +135,10 @@
                                 <div class="form-group">
                                     <label for="">Price Type:</label>
                                     <br>
-                                    <label for="wt1">Monthly&nbsp;</label><input onchange="checkRadioButton()" id="pt1" type="radio"
+                                    <label for="pt1">Monthly&nbsp;</label><input onchange="checkRadioButton()" id="pt1" type="radio"
                                                                                  value="1">
                                     <br>
-                                    <label for="wt2">Per/Hour&nbsp;</label><input onchange="checkRadioButton()" id="pt2" type="radio"
+                                    <label for="pt2">Per/Hour&nbsp;</label><input onchange="checkRadioButton()" id="pt2" type="radio"
                                                                                   value="2">
                                 </div>
 
@@ -299,9 +295,9 @@
                                     </div>
 
                                     <div class="flex">
-                                         <input id="ph1" step=".01" type="hidden" class="form-control" name="price_per_hour_min" value="">
+                                         <input  id="ph1" step=".01" type="hidden" class="form-control" name="price_per_hour_min" value="">
 
-                                         <input id="ph2" step=".01" type="hidden" class="form-control" name="price_per_hour_max" value="">
+                                         <input  id="ph2" step=".01" type="hidden" class="form-control" name="price_per_hour_max" value="">
                                     </div>
                                 </div>
 

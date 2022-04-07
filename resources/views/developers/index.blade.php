@@ -64,13 +64,13 @@
                                             {{ $item->phone }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->messenger }}
+                                            <a href="{{ $item->messenger }}">{{ $item->messenger }}</a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->email }}
+                                            <a href="mailto:{{ $item->email }}">{{ $item->email }}</a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->social_media }}
+                                            <a href="{{ $item->social_media }}">{{ $item->social_media }}</a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             @can('user_access')
