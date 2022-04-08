@@ -28,7 +28,6 @@ class FilterController extends Controller
         $age_min = $request['age_min'];
         $working_type = $request['working_type'];
         $skills = Skill::all();
-
         //$developer  = (new Developer())->newQuery();
         $developer=new Developer();
         if($request_skills) {

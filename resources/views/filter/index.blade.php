@@ -107,7 +107,7 @@
 
                     <form action="{{route('search')}}" method="post">
                         @csrf
-                        @if(!empty($selecedData))
+                        @if(!empty($selectedData))
                             <div class=" form">
                                 <div class="form-group">
                                     <label for="">Skills</label>
@@ -148,37 +148,50 @@
                                         if(document.getElementById('pt1').checked) {
                                             document.getElementById('ph1').disabled=true;
                                             document.getElementById('ph2').disabled=true;
+                                            document.getElementById('range_ph').disabled=true;
                                         }
                                         else{
                                             document.getElementById('ph1').disabled=false;
                                             document.getElementById('ph2').disabled=false;
+                                            document.getElementById('range_ph').disabled=false;
                                         }
                                         if(document.getElementById('pt2').checked) {
                                             document.getElementById('pm1').disabled=true;
                                             document.getElementById('pm2').disabled=true;
+                                            document.getElementById('range_pm').disabled=true;
                                         }
                                         else{
                                             document.getElementById('pm1').disabled=false;
                                             document.getElementById('pm2').disabled=false;
+                                            document.getElementById('range_pm').disabled=false;
                                         }
                                     }
                                 </script>
 
+
                                 <div class="form-group">
                                     <label for="">Price Monthly</label>
-                                    <div class="flex">
-                                        <label for="pm1">max:</label> <input id="pm1" step=".01" type="number" class="form-control" name="price_min" value="{{$selectedData->price_min}}">
 
-                                        <label for="pm1">min:</label>  <input id="pm2" step=".01" type="number" class="form-control" name="price_max" value="{{$selectedData->price_max}}">
+                                    <div class="sliderCont">
+                                        <div  id="range_pm"></div>
+                                    </div>
+
+                                    <div class="flex">
+                                        <input id="pm1" step=".01" type="hidden" class="form-control" name="price_min" value="">
+                                        <input id="pm2" step=".01" type="hidden" class="form-control" name="price_max" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="">Price Per/Hour</label>
-                                    <div class="flex">
-                                        <label for="ph1">max:</label>  <input id="ph1" step=".01" type="number" class="form-control" name="price_per_hour_min" value="{{$selectedData->price_per_hour_min}}">
+                                    <div class="sliderCont">
+                                        <div  id="range_ph"></div>
+                                    </div>
 
-                                        <label for="ph2">min:</label> <input id="ph2" step=".01" type="number" class="form-control" name="price_per_hour_max" value="{{$selectedData->price_per_hour_max}}">
+                                    <div class="flex">
+                                        <input  id="ph1" step=".01" type="hidden" class="form-control" name="price_per_hour_min" value="">
+
+                                        <input  id="ph2" step=".01" type="hidden" class="form-control" name="price_per_hour_max" value="">
                                     </div>
                                 </div>
 
@@ -194,19 +207,25 @@
 
                                 <div class="form-group">
                                     <label for="">Experience:</label>
+                                    <div class="sliderCont">
+                                        <div  id="range_exp"></div>
+                                    </div>
                                     <div class="flex">
-                                        <label for="exp1">max:</label>    <input id="exp1" class="form-control" type="number" name="exp_min" value="{{$selectedData->exp_min}}">
+                                        <input id="exp1" class="form-control" type="hidden" name="exp_min" value="">
 
-                                        <label for="exp2">min:</label>     <input id="exp2" class="form-control" type="number" name="exp_max" value="{{$selectedData->exp_max}}">
+                                        <input id="exp2" class="form-control" type="hidden" name="exp_max" value="">
                                     </div>
                                 </div>
 
-                                <div class="form-group ">
+                                <div class="form-group">
                                     <label for="">Age Range:</label>
+                                    <div class="sliderCont">
+                                        <div  id="range_age"></div>
+                                    </div>
                                     <div class="flex">
-                                        <label for="age1">max:</label>  <input id="age1" class="form-control" type="number" name="age_min" value="{{$selectedData->age_min}}">
+                                        <input id="age1" class="form-control" type="hidden" name="age_min" value="">
 
-                                        <label for="age2">max:</label>   <input id="age2" class="form-control" type="number" name="age_max" value="{{$selectedData->age_max}}">
+                                        <input id="age2" class="form-control" type="hidden" name="age_max" value="">
                                     </div>
                                 </div>
 
