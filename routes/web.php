@@ -40,3 +40,6 @@ Route::resource('requests', \App\Http\Controllers\RequestController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('filter',[\App\Http\Controllers\FilterController::class,'index'])->name('filter');
 Route::post('filter',[\App\Http\Controllers\FilterController::class,'search'])->name('search');
+
+Route::post('from-bot',[\App\Http\Controllers\BotRequestController::class,'add'])->name('from-bot');
+//request from bot for add new dev
